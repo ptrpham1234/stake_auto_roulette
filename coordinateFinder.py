@@ -1,8 +1,11 @@
+import time
 import pyautogui
-from PIL import Image
+import pygame
+import os
 
 
 def find_color_on_screen(target_color):
+    pyautogui.moveTo(440, 660)
     screenshot = pyautogui.screenshot()
 
     # Convert the screenshot to an RGB image
@@ -20,14 +23,45 @@ def find_color_on_screen(target_color):
 
     return None  # Return None if the color is not found
 
+def play_sound():
+    # Initialize pygame
+    pygame.init()
+
+    # Get the current working directory
+    current_directory = os.getcwd()
+
+    # Your data path (replace 'data' with your actual data path)
+    sound_path = 'data/sounds/mixkit-atm-cash-machine-key-press-2841.wav'
+
+    # Join the current directory with the data path
+    sound_file = os.path.join(current_directory, sound_path)
+
+    # Load a sound file (replace 'path/to/your/soundfile.mp3' with the actual path to your sound file)
+    pygame.mixer.music.load(sound_file)
+
+    # Play the sound
+    pygame.mixer.music.play()
+
+    # Add a delay to allow the sound to play
+    time.sleep(1)  # Adjust the sleep time as needed
+
+    # Stop the sound
+    pygame.mixer.music.stop()
+
+    # Quit pygame
+    pygame.quit()
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     # Example: Find the first occurrence of the color (255, 0, 0) (red)
-    target_color = (31, 255, 32)
+    print("Starting get ready")
+    time.sleep(2)
+    target_color = (120, 251, 83)
     result = find_color_on_screen(target_color)
 
     if result:
         print(f"Found color at coordinates: {result}")
     else:
         print("Color not found on the screen.")
+
+    play_sound()
