@@ -140,6 +140,5 @@ cython_debug/
 
 
 # custom
-test.py
-data/
+test.*
 .idea/
